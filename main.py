@@ -8,6 +8,19 @@ Update: 2025-10-23 19:48:05
 Copyright (c) 2023-2025 by Hmily, All Rights Reserved.
 Function: Record live stream video.
 """
+import os
+
+def force_certifi_ca():
+    try:
+        import certifi
+        os.environ["SSL_CERT_FILE"] = certifi.where()
+        os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
+    except Exception:
+        # certifi 不存在就不设置，后面你可以让打包强制带上 certifi
+        pass
+
+force_certifi_ca()
+
 import asyncio
 import os
 import sys
